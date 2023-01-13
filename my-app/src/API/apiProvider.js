@@ -1,6 +1,7 @@
 import { API_KEY } from "./api_key";
 class API {
   constructor() {
+    // this.url = "http://localhost:3005/schedules";
     this.url = `https://api.sportradar.us/soccer/trial/v4/`;
     this.season = "sr:season:77453";
     this.language_code = "en";
