@@ -1,26 +1,34 @@
 import { API_KEY } from "./api_key";
 class API {
   constructor() {
-    // this.url = "http://localhost:3005/schedules";
-    this.url = `https://api.sportradar.us/soccer/trial/v4/`;
-    this.season = "sr:season:77453";
+    this.baseUrl = "http://localhost:3005/schedules";
+    this.baseUrl = `https://api.sportradar.us/soccer/trial/v4/`;
+    this.competitions = "sr:competition:202";
     this.language_code = "en";
     this.token = API_KEY;
   }
 
-  loadData() {
+  loadData(season) {
     const options = {
       method: "GET",
     };
-
     return this._fetch(
       options,
-      `${this.language_code}/seasons/${this.season}/schedules.json?api_key=${this.token}`
+      `${this.language_code}/seasons/${season}/schedules.json?api_key=${this.token}`
+    );
+  }
+  loadSeasons() {
+    const options = {
+      method: "GET",
+    };
+    return this._fetch(
+      options,
+      `${this.language_code}/competitions/${this.competitions}/seasons.json?api_key=${this.token}`
     );
   }
 
   _fetch(options, additionalPath = "") {
-    const url = this.url + additionalPath;
+    const url = this.baseUrl + additionalPath;
     return fetch(url, options).then((resp) => {
       if (resp.ok) {
         return resp.json();

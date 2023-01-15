@@ -5,41 +5,67 @@ import TablePagination from "@mui/material/TablePagination";
 import {
   TableContainer,
   Table,
-  TableHead,
   TableBody,
   TableRow,
   TableCell,
   Paper,
 } from "@mui/material";
+import TableHeader from "../TableHeader/TableHeader";
+import Dropdown from "../Dropdown/Dropdown";
 
 // Ready to refactor - necessarily (!)
 const TableMUI = () => {
   const init = {
     events: [],
   };
+  //api season data state
   const [data, setData] = useState(init);
   const apiProvider = new API();
 
+  // dropdown state - season chosen in select
+  const [currentSeason, setCurrentSeason] = useState("sr:season:77453");
+  // gettin seasons name and id from Api
+  const [seasons, setSeasons] = useState(null);
+
+  // pagination state
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(15);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+
+  useEffect(() => {
+    getSeasonsFromApi();
+  }, []);
+
+  useEffect(() => {
+    getSeasonDataFromApi();
+  }, [currentSeason]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
+    console.log(page);
   };
-
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
 
-  const getData = () => {
-    apiProvider.loadData().then((resp) => {
+  const getSeasonDataFromApi = () => {
+    apiProvider.loadData(currentSeason).then((resp) => {
       setData({
         events: resp.schedules,
       });
     });
+    console.log("API call");
   };
-
+  const getSeasonsFromApi = () => {
+    apiProvider.loadSeasons().then((resp) => {
+      setSeasons(resp.seasons);
+    });
+  };
+  const changeSeason = (event) => {
+    setCurrentSeason(event.target.value);
+    setPage(0);
+    console.log(event.target.value);
+  };
   // Below function i made in case in Api "home" and "away" qualifier of competitors would be set in random order.
   // Currently 'home' is always first and 'away' second so let's say it's not neccesary to have it but imho always better to be sure.
 
@@ -49,27 +75,14 @@ const TableMUI = () => {
     ).name;
   };
 
-  const headColumns = [
-    "Team 1 (home)",
-    "Team 2 (away)",
-    "Result",
-    "Match date",
-    "Half time score",
-    "Stadium name",
-  ];
-
-  const renderHeadColumns = () => {
-    return (
-      <TableRow>
-        {headColumns.map((colName) => (
-          <TableCell key={colName}>{colName}</TableCell>
-        ))}
-      </TableRow>
-    );
-  };
-
   const checkIfPostponed = (status) => {
-    return status !== "postponed";
+    return status === "postponed";
+  };
+  const checkIfCanceled = (status) => {
+    return status === "cancelled";
+  };
+  const checkIfStarted = (status) => {
+    return status === "not_started";
   };
 
   const getStadiumName = (data) => {
@@ -85,13 +98,18 @@ const TableMUI = () => {
     );
   };
   const getHalfTimeScore = (data) => {
-    return checkIfPostponed(data.sport_event_status.match_status) ? (
+    if (checkIfPostponed(data.sport_event_status.status)) {
+      return <TableCell>Postponed</TableCell>;
+    } else if (checkIfCanceled(data.sport_event_status.status)) {
+      return <TableCell>Cancelled</TableCell>;
+    } else if (checkIfStarted(data.sport_event_status.status)) {
+      return <TableCell>Not started</TableCell>;
+    }
+    return (
       <TableCell>
         <span>{data.sport_event_status.period_scores[0].home_score}</span>-
         <span>{data.sport_event_status.period_scores[0].away_score}</span>
       </TableCell>
-    ) : (
-      <TableCell>Postponed</TableCell>
     );
   };
 
@@ -118,7 +136,7 @@ const TableMUI = () => {
     );
   };
   const getResult = (data) => {
-    return checkIfPostponed(data.sport_event_status.match_status) ? (
+    return !checkIfPostponed(data.sport_event_status.match_status) ? (
       <TableCell key={data.sport_event.competitors[0].name}>
         <span>{data.sport_event_status.home_score}</span>-
         <span>{data.sport_event_status.away_score}</span>
@@ -151,10 +169,6 @@ const TableMUI = () => {
     );
   };
 
-  useEffect(() => {
-    getData();
-  }, []);
-
   const emptyRows =
     rowsPerPage -
     Math.min(rowsPerPage, data.events.length - page * rowsPerPage);
@@ -169,14 +183,21 @@ const TableMUI = () => {
   };
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer
+      style={{
+        margin: "30px auto",
+        background: "transparent",
+      }}
+      component={Paper}
+    >
       <Table aria-label="table">
-        <TableHead>{renderHeadColumns()}</TableHead>
+        <TableHeader />
         <TableBody>
           {data ? renderBodyData(data) : renderError()}
           {renderEmptyRows()}
         </TableBody>
       </Table>
+
       <TablePagination
         rowsPerPageOptions={[5, 10, 15, 20]}
         component="div"
@@ -185,6 +206,11 @@ const TableMUI = () => {
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}
         onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+      <Dropdown
+        changeSeason={changeSeason}
+        value={currentSeason}
+        seasons={seasons}
       />
     </TableContainer>
   );
