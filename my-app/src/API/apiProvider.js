@@ -1,7 +1,6 @@
 import { API_KEY } from "./api_key";
 class API {
   constructor() {
-    this.baseUrl = "http://localhost:3005/schedules";
     this.baseUrl = `https://api.sportradar.us/soccer/trial/v4/`;
     this.competitions = "sr:competition:202";
     this.language_code = "en";
@@ -24,6 +23,15 @@ class API {
     return this._fetch(
       options,
       `${this.language_code}/competitions/${this.competitions}/seasons.json?api_key=${this.token}`
+    );
+  }
+  loadTimeline(sportEventId) {
+    const options = {
+      method: "GET",
+    };
+    return this._fetch(
+      options,
+      `${this.language_code}/sport_events/${sportEventId}/timeline.json?api_key=${this.token}`
     );
   }
 

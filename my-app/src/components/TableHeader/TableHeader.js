@@ -1,26 +1,17 @@
 import React from "react";
 import { TableHead, TableRow, TableCell } from "@mui/material";
-
+import { headColumns } from "../../constants/constants";
 const TableHeader = () => {
-  const headColumns = [
-    "Team 1 (home)",
-    "Team 2 (away)",
-    "Result",
-    "Match date",
-    "Half time score",
-    "Stadium name",
-  ];
-
   const renderHeadColumns = () => {
-    return (
-      <TableRow>
-        {headColumns.map((colName) => (
-          <TableCell key={colName}>{colName}</TableCell>
-        ))}
-      </TableRow>
-    );
+    return headColumns.map((colName) => (
+      <TableCell key={colName}>{colName}</TableCell>
+    ));
   };
-
-  return <TableHead>{renderHeadColumns()}</TableHead>;
+  
+  return (
+    <TableHead>
+      <TableRow>{renderHeadColumns()}</TableRow>
+    </TableHead>
+  );
 };
 export default TableHeader;
