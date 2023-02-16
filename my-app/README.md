@@ -36,10 +36,11 @@ npm i
 npm start
 ````
 - To access the api you must put the key in the file below with following structure
+- temporary key: e49z2ru2g8huc43xke7qe6p9
 ````
 src\API\api_key.js
 
-export const API_KEY = "your_api_key";
+export const API_KEY = e49z2ru2g8huc43xke7qe6p9;
 
 ````
 
