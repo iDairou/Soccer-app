@@ -44,8 +44,8 @@ export const API_KEY = e49z2ru2g8huc43xke7qe6p9;
 
 ````
 
-## CORS requests solutionyou to send cross-domain requests
-API is not intended to be called from a client application. To avoid it this it's enough to install plugin to your browser which allows you to send cross-domain requests. For chrome it would be Moesif Origin & CORS Changer (https://chrome.google.com/webstore/detail/moesif-origin-cors-change/digfbfaphojjndkpccljibejjbppifbc).
+## CORS requests solution
+API is not intended to be called from a client application. To avoid it it's enough to install plugin to your browser which allows you to send cross-domain requests. For chrome it would be Moesif Origin & CORS Changer (https://chrome.google.com/webstore/detail/moesif-origin-cors-change/digfbfaphojjndkpccljibejjbppifbc).
 After installing this plugin just set your plugin ON (on your icon at the top), reload the page and everything should work fine.
 
 ## Author 🔥
