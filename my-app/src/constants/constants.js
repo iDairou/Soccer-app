@@ -27,7 +27,7 @@ const iconCardStyles = {
 
 export const availableEvents = {
 	score_change: {
-		icon: <SportsSoccerIcon></SportsSoccerIcon>,
+		icon: <SportsSoccerIcon/>,
 	},
 	yellow_card: {
 		icon: (
@@ -50,6 +50,6 @@ export const availableEvents = {
 		),
 	},
 	substitution: {
-		icon: <CompareArrowsIcon></CompareArrowsIcon>,
+		icon: <CompareArrowsIcon/>,
 	},
 };

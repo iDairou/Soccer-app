@@ -68,7 +68,6 @@ const EventTimeline = () => {
 					variant="contained"
 				></ArrowBackIosNewIcon>
 			</IconButton>
-
 			<TimelineHeader
 				teamHome={teamsResults[0][0].name}
 				teamAway={teamsResults[0][1].name}

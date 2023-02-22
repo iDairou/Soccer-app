@@ -9,7 +9,7 @@ const EventTimelineItem = (props) => {
 	const { position, id, children, type, sx } = props;
 	return (
 		<TimelineItem
-			sx={{ minHeight: "60px" }}
+			sx={{ minHeight: "6 0px" }}
 			type={type}
 			key={id}
 			position={position}

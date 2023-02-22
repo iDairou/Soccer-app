@@ -17,6 +17,7 @@ const App = () => {
 				<Routes location={location}>
 					<Route exact path="/" element={<SeasonTable />} />
 					<Route path="/timelines/:id" element={<EventTimeline />} />
+					<Route path="/onas" element={<div>O NAS</div>} />
 				</Routes>
 			</CSSTransition>
 		</TransitionGroup>

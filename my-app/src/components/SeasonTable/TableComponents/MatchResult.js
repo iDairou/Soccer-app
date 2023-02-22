@@ -2,8 +2,7 @@ import React from "react";
 import { TableCell } from "@mui/material";
 import { checkIfPostponed } from "../../../helpers";
 
-const Result = (props) =>{
-    const {data} = props
+const MatchResult = ({data}) =>{
 	return !checkIfPostponed(data.sport_event_status.match_status) ? (
 		<TableCell key={data.sport_event.competitors[0].name}>
 			<span>{data.sport_event_status.home_score}</span>-
@@ -13,4 +12,4 @@ const Result = (props) =>{
 		<TableCell>Postponed</TableCell>
 	);
 }
-export default Result
+export default MatchResult

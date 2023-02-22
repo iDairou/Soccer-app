@@ -12,46 +12,18 @@ import {
 } from "@mui/material";
 import TableHeader from "../TableHeader/TableHeader";
 import Dropdown from "../Dropdown/Dropdown";
-import Team from "./TableComponents/Team";
-import Result from "./TableComponents/Result";
-import MatchDate from "./TableComponents/MatchDate";
-import HalftimeScore from "./TableComponents/HalftimeScore";
-import Stadium from "./TableComponents/Stadium";
 import CircularLoader from "../Loader/CircularLoader";
 import { useSeasonTable } from "../../hooks/useSeasonTable";
-import { useNavigate } from "react-router-dom";
+import BodyData from "./TableComponents/BodyData";
 
 const SeasonTable = () => {
 	const { tableState, changePage, changeSeason, handleChangeRowsPerPage } =
 		useSeasonTable();
-	const navigate = useNavigate();
+
 
 	const handleChangePage = (event, newPage) => {
 		changePage(newPage);
 	};
-
-	const renderBodyData = (data) => {
-		return data
-			.slice(
-				tableState.page * tableState.rowsPerPage,
-				tableState.page * tableState.rowsPerPage + tableState.rowsPerPage
-			)
-			.map((item) => (
-				<TableRow
-					onClick={() => navigate(`/timelines/${item.sport_event.id}`)}
-					hover
-					key={item.sport_event.id}
-				>
-					<Team data={item} type="home" team={0} />
-					<Team data={item} type="away" team={1} />
-					<Result data={item} />
-					<MatchDate data={item} />
-					<HalftimeScore data={item} />
-					<Stadium data={item} />
-				</TableRow>
-			));
-	};
-
 	return (
 		<Box
 			sx={{
@@ -75,7 +47,7 @@ const SeasonTable = () => {
 						}}
 					>
 						{tableState.events && tableState.events.length > 0 ? (
-							renderBodyData(tableState.events)
+							<BodyData tableState={tableState}/>
 						) : (
 							<TableRow>
 								<TableCell>

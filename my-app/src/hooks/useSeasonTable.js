@@ -15,7 +15,7 @@ export const useSeasonTable = () => {
 				type: actions.UPDATE_TABLE_DATA,
 				payload: resp.schedules,
 			});
-		});
+		})
 	};
 	const getSeasonsFromApi = () => {
 		apiProvider.loadSeasons().then((resp) => {
@@ -26,11 +26,10 @@ export const useSeasonTable = () => {
 		});
 	};
 	const changePage = (newPage) => {
-		console.log(newPage);
 		dispatch({
 			type: actions.UPDATE_PAGE,
 			payload: newPage,
-		});
+		})
 	};
 	const handleChangeRowsPerPage = (rows) => {
 		setPageTo0();
