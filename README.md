@@ -2,7 +2,7 @@
 
 ## Overview 🔍
 
-![](./src/animation/Animation.gif)
+![](./my-app/src/animation/Animation.gif)
 
 The project is an application built using Javascript along with the React library. The main goal is to retrieve and visualize data from the database according to the selected Ekstraklasa* season.
 
