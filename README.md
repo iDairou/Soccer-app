@@ -4,9 +4,27 @@
 
 ![](./my-app/src/animation/Animation.gif)
 
-The project is an application built using Javascript along with the React library. The main goal is to retrieve and visualize data from the database according to the selected Ekstraklasa* season.
+# Project: Ekstraklasa Data Visualization from Sportradar API
 
-_Ekstraklasa - is the highest class in the hierarchy of men's league football in Poland_
+**Description:**
+
+This project is an interactive web application that fetches data from the Sportradar API concerning the Polish Ekstraklasa (top-tier football league). The application allows users to browse detailed information about matches from the last three seasons, with the ability to select a specific season.
+
+**Features:**
+
+*   **Season Selection:** Users can choose the Ekstraklasa season from which they want to display data.
+*   **Loaders:** While data is being retrieved from the API, loaders (loading animations) are displayed, informing the user that the data is being processed. This provides a better user experience and prevents the impression that the application has frozen.
+*   **Match Results Table:** Match results are presented in a clear and readable table.
+*   **Adjustable Rows per Page:** Users can customize the number of matches displayed on a single page of the table.
+*   **Dynamic Pagination:** The results table features dynamic pagination, allowing easy browsing of results from multiple matchdays.
+*   **Match Details:** Upon selecting a specific match, the user is presented with a detailed timeline of the match, containing key events such as goals, player substitutions, cards, etc.
+
+**Future Enhancements:**
+
+*   Addition of team and individual player statistics.
+*   Expansion of data scope to include other football leagues.
+*   Implementation of a match search function.
+*   Improvements to the user interface.
 
 # API - https://developer.sportradar.com/io-docs
 
@@ -38,11 +56,11 @@ npm i
 npm start
 ````
 - To access the api you must put the key in the file below with following structure
-- temporary key: e49z2ru2g8huc43xke7qe6p9
+- temporary key: gbtPlIEHLjRb8iCAyOrav5wa9ldT5qfWCGyIZUcs
 ````
 src\API\api_key.js
 
-export const API_KEY = e49z2ru2g8huc43xke7qe6p9;
+export const API_KEY = gbtPlIEHLjRb8iCAyOrav5wa9ldT5qfWCGyIZUcs;
 
 ````
 
