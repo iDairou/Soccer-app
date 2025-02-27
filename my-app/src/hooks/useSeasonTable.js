@@ -15,7 +15,7 @@ export const useSeasonTable = () => {
 				type: actions.UPDATE_TABLE_DATA,
 				payload: resp.schedules,
 			});
-		})
+		});
 	};
 	const getSeasonsFromApi = () => {
 		apiProvider.loadSeasons().then((resp) => {
@@ -29,7 +29,7 @@ export const useSeasonTable = () => {
 		dispatch({
 			type: actions.UPDATE_PAGE,
 			payload: newPage,
-		})
+		});
 	};
 	const handleChangeRowsPerPage = (rows) => {
 		setPageTo0();
@@ -51,7 +51,7 @@ export const useSeasonTable = () => {
 	};
 
 	useEffect(() => {
-		getSeasonDataFromApi("sr:season:77453");
+		getSeasonDataFromApi("sr:season:94031");
 		setTimeout(() => {
 			//Api limit call is 1 call per 1s so i made custom delay for one of the calls to make all content loaded at the beggining, otherwise user would need to refresh the page once to get data
 			getSeasonsFromApi();

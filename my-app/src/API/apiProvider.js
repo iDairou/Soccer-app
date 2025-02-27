@@ -1,7 +1,7 @@
 import { API_KEY } from "./api_key";
 class API {
 	constructor() {
-		this.baseUrl = `https://api.sportradar.us/soccer/trial/v4/`;
+		this.baseUrl = `https://api.sportradar.com/soccer/trial/v4/`;
 		this.competitions = "sr:competition:202";
 		this.language_code = "en";
 		this.token = API_KEY;

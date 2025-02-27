@@ -17,7 +17,7 @@ const Dropdown = (props) => {
 				id="dropdown-select"
 				value={value}
 				label="Season"
-				defaultValue="sr:season:77453"
+				defaultValue="sr:season:94031"
 				onChange={changeSeason}
 			>
 				{seasons.map((season) => {
